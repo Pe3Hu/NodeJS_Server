@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var xhr = new XMLHttpRequest();
+
+    //var params = 'name=' + encodeURIComponent(name);
+
+    xhr.open("GET", 'http://localhost:3000/get_images', true);
+
+    //xhr.open('GET', 'http://localhost:3000/get_images' + params, true);
+
+    xhr.send();
+
+    xhr.onreadystatechange = function (ev) {
+        if (xhr.readyState != 4) return;
+
+        if (xhr.status != 200) {
+            alert( xhr.status + ': ' + xhr.statusText );
+        } else {
+            var img;
+            img  = document.createElement('img');
+            img.src = "data:image/png;base64,"+ xhr.responseText;
+            document.body.appendChild(img);
+        }
+    }
+</script>
+
+</body>
+</html>
